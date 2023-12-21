@@ -16,6 +16,9 @@ options = {'top': 0, 'left': 0, 'width': monitor_width, 'height': monitor_height
 # open video stream with defined parameters
 stream = ScreenGear(logging=True, **options).start()
 
+monitor_str = "1080p"
+if monitor_height == 1440:
+    monitor_str = "1440p"
 
 def current_milli_time():
     return round(time.time() * 1000)
@@ -47,17 +50,18 @@ def scan_image(image, screen_frame, threshold, name):
     match_value, match_location = match_image(image, screen_frame)
     if match_value > threshold:
         print(f"{name} found at location: {match_location}")
+        print(match_value)
         if should_screenshot: cv2.imwrite(f'screenshots/{name}-{current_milli_time()}.png', screen_frame)
         return True
     else:
         return False
 
 
-racestart = cv2.imread('racestart.png', cv2.IMREAD_UNCHANGED)
-lap2 = cv2.imread('lap2.png', cv2.IMREAD_UNCHANGED)
-lap3 = cv2.imread('lap3.png', cv2.IMREAD_UNCHANGED)
-place = cv2.imread('place.png', cv2.IMREAD_UNCHANGED)
-game_mode = cv2.imread('gamemode.png', cv2.IMREAD_UNCHANGED)
+racestart = cv2.imread(f'{monitor_str}/racestart.png', cv2.IMREAD_UNCHANGED)
+lap2 = cv2.imread(f'{monitor_str}/lap2.png', cv2.IMREAD_UNCHANGED)
+lap3 = cv2.imread(f'{monitor_str}/lap3.png', cv2.IMREAD_UNCHANGED)
+place = cv2.imread(f'{monitor_str}/place.png', cv2.IMREAD_UNCHANGED)
+game_mode = cv2.imread(f'{monitor_str}/gamemode.png', cv2.IMREAD_UNCHANGED)
 
 
 def convert_to_minutes_seconds(big_time, small_time):
