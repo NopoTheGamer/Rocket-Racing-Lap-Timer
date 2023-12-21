@@ -1,3 +1,4 @@
+import ctypes
 import tkinter as tk
 import time
 
@@ -123,6 +124,7 @@ def convert_string(start_time, lap1, lap2, lap3):
 
 
 def main_running():
+    ctypes.windll.shcore.SetProcessDpiAwareness(0)
     root = tk.Tk()
     gui = MyGUI(root)
     root.mainloop()

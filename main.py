@@ -1,4 +1,5 @@
 # import required libraries
+import ctypes
 import time
 import cv2
 import screeninfo
@@ -6,7 +7,7 @@ from vidgear.gears import ScreenGear
 from sendWebhook import send_webhook
 import PIL
 import dxcam
-
+ctypes.windll.shcore.SetProcessDpiAwareness(0)
 # define dimensions of screen w.r.t to given monitor to be captured
 monitors = screeninfo.get_monitors()
 primary_monitor = monitors[0]
